@@ -1,20 +1,40 @@
 package cn.zilio.myweb.pojo;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import cn.zilio.myweb.utils.UserType;
+import org.hibernate.annotations.GenericGenerator;
+
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
+@GenericGenerator(name="jpa-uuid", strategy = "uuid")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "jpa-uuid")
+    @Column(name = "uid", unique = true,length = 40)
     String uid;
-    @NotNull
+
+    @Column(name = "name", nullable = false)
     String name;
-    @NotNull
+
+    @Column(name = "username", nullable = false)
+    String username;
+
+    @Column(name = "age", nullable = true)
+    Integer age;
+
+    @Column(name = "password", nullable = false)
+    String password;
+
+    @Column(name = "email", nullable = false)
     String email;
-    @NotNull
+
+    @Column(name = "phone_number", nullable = false)
     String phoneNumber;
+
+    @Column(name = "user_type", nullable = false)
+    UserType userType;
+
     public String getUid() {
         return uid;
     }
@@ -45,5 +65,37 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }
