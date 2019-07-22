@@ -4,6 +4,8 @@ import javax.persistence.*;
 import cn.zilio.myweb.utils.UserType;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Date;
+
 
 @Entity
 @Table(name = "user")
@@ -34,6 +36,50 @@ public class User {
 
     @Column(name = "user_type", nullable = false)
     UserType userType;
+
+    @Column(name = "user_regist_date", nullable = false)
+    Date registDate;
+
+    @Column(name = "user_balance", nullable = false)
+    Integer userBalance;
+
+    @Column(name = "user_coin", nullable = false)
+    Integer userCoin;
+
+    @Column(name = "user_last_login", nullable = false)
+    Date userLastLogin;
+
+    public Date getUserLastLogin() {
+        return userLastLogin;
+    }
+
+    public void setUserLastLogin(Date userLastLogin) {
+        this.userLastLogin = userLastLogin;
+    }
+
+    public Date getRegistDate() {
+        return registDate;
+    }
+
+    public void setRegistDate(Date registDate) {
+        this.registDate = registDate;
+    }
+
+    public Integer getUserBalance() {
+        return userBalance;
+    }
+
+    public void setUserBalance(Integer userBalance) {
+        this.userBalance = userBalance;
+    }
+
+    public Integer getUserCoin() {
+        return userCoin;
+    }
+
+    public void setUserCoin(Integer userCoin) {
+        this.userCoin = userCoin;
+    }
 
     public String getUid() {
         return uid;
