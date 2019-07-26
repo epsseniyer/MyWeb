@@ -41,7 +41,7 @@ public class User {
     Date registDate;
 
     @Column(name = "user_balance", nullable = false)
-    Integer userBalance;
+    Double userBalance;
 
     @Column(name = "user_coin", nullable = false)
     Integer userCoin;
@@ -65,11 +65,11 @@ public class User {
         this.registDate = registDate;
     }
 
-    public Integer getUserBalance() {
+    public Double getUserBalance() {
         return userBalance;
     }
 
-    public void setUserBalance(Integer userBalance) {
+    public void setUserBalance(Double userBalance) {
         this.userBalance = userBalance;
     }
 
