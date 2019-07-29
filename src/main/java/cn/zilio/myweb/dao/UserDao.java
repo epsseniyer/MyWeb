@@ -8,5 +8,7 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     User findUserByEmail(String email) throws Exception;
 
+    User findUserByUsername(String username) throws Exception;
+
     User saveAndFlush(User user);
 }
