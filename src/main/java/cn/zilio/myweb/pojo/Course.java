@@ -18,4 +18,8 @@ public class Course {
     Integer userId;
     @Column(name = "course_code", nullable = false)
     Integer courseCode;
+    @Column(name = "course_member_amount", nullable = false)
+    Integer courseMemberAmount;
+    @Column(name = "course_comment", nullable = false)
+    Integer courseCommentId;
 }

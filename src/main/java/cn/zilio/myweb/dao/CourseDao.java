@@ -14,5 +14,7 @@ public interface CourseDao extends JpaRepository<Course, Long> {
 
     List<Course> findAllByCourseCode(Integer courseCode) throws Exception;
 
+    List<Course> findAllByUserId(String userId) throws Exception;
+
     void deleteByCourseId(Integer courseId) throws Exception;
 }
