@@ -4,6 +4,7 @@ import cn.zilio.myweb.utils.LessonOrderStatus;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "lesson_order")
@@ -19,6 +20,8 @@ public class LessonOrder {
     String userId;
     @Column(name = "lesson_order_status", nullable = false)
     LessonOrderStatus courseOrderStatus;
+    @Column(name = "lesson_order_date", nullable = false)
+    Date lessonOrderDate;
 
     public Integer getCourseOrderId() {
         return courseOrderId;
@@ -50,5 +53,13 @@ public class LessonOrder {
 
     public void setCourseOrderStatus(LessonOrderStatus courseOrderStatus) {
         this.courseOrderStatus = courseOrderStatus;
+    }
+
+    public Date getLessonOrderDate() {
+        return lessonOrderDate;
+    }
+
+    public void setLessonOrderDate(Date lessonOrderDate) {
+        this.lessonOrderDate = lessonOrderDate;
     }
 }

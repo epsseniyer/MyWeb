@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.Map;
 
 @EnableAutoConfiguration
 @RestController
@@ -21,14 +22,18 @@ public class UserController {
     UserService userService;
     @RequestMapping(path = "/User/queryByUid")
     public User queryUserByIdController(String uid) throws Exception {
-        return userService.getUserById(uid);
+        User user = new User();
+        user.setUid(uid);
+        return userService.findUser(user);
     }
     @RequestMapping(path = "/User/QueryByEmail/{email}")
     public User queryUserByNameController(@PathVariable String email) throws Exception {
-        return userService.getUserByEmail(email);
+        User user = new User();
+        user.setEmail(email);
+        return userService.findUser(user);
     }
    @RequestMapping(path = "/User/Register")
-    public User registerUser(User user) {
+    public Map<Integer, User> registerUser(User user) throws Exception {
         User u = new User();
         u.setPhoneNumber("+86-15202812000");
         u.setName("Yin Zhi");
