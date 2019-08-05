@@ -2,16 +2,18 @@ package cn.zilio.myweb.services;
 
 import cn.zilio.myweb.pojo.User;
 
+import java.util.Map;
+
 public interface UserService {
-    public User getUserById(String uid) throws Exception;
+    boolean userValidation(User user) throws Exception;
 
-    public User getUserByEmail(String email) throws Exception;
+    User updateUser(User user) throws Exception;
 
-    public User getUserByName(String username) throws Exception;
+    Map<Integer, User> addUser(User user) throws Exception;
 
-    public User addUser(User user);
+    User findUser(User user) throws Exception;
 
-    public User updateUser(User user) throws Exception;
+    boolean userEmailValidate(String email) throws Exception;
 
-    public boolean userValidation(User user) throws Exception;
+    boolean userUsernameValidate(String username) throws Exception;
 }
