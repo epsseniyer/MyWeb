@@ -11,7 +11,7 @@ import java.util.Date;
 @GenericGenerator(name = "jpa_lesson_order_id", strategy = "auto")
 public class LessonOrder {
     @Id
-    @GeneratedValue(generator = "jpa_lesson_order_id")
+    @GeneratedValue(generator = "jpa_lesson_order_id", strategy = GenerationType.AUTO)
     @Column(name = "lesson_order_id")
     Integer courseOrderId;
     @Column(name = "lesson_id", nullable = false)

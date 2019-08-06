@@ -1,15 +1,14 @@
 package cn.zilio.myweb.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "lesson")
 public class Lesson {
     @Id
-    Integer vedioId;
+    @Column(name = "lesson_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer lessonId;
     @Column(name = "course_id", nullable = false)
     Integer courseId;
     @Column(name = "lesson_vedio_path", nullable = false)
