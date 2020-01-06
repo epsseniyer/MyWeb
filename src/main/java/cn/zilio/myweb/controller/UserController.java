@@ -1,62 +1,47 @@
 package cn.zilio.myweb.controller;
 
 import cn.zilio.myweb.pojo.User;
+import cn.zilio.myweb.utils.StatusCode;
+import cn.zilio.myweb.utils.StringUtils;
 import cn.zilio.myweb.services.UserService;
-import cn.zilio.myweb.utils.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
-@EnableAutoConfiguration
 @RestController
-@RequestMapping(path = "/user")
+@RequestMapping(path="/User")
 public class UserController {
     @Autowired
     UserService userService;
-    @RequestMapping(path = "/User/queryByUid")
-    public User queryUserByIdController(String uid) throws Exception {
-        User user = new User();
-        user.setUid(uid);
-        return userService.findUser(user);
+
+    @RequestMapping(path="/userLoginController")
+    public Map<String, Object> userLoginController(HttpServletRequest request) {
+        Map<String, Object> result = new HashMap<>();
+        HttpSession httpSession = request.getSession();
+        String verifyCode = (String) httpSession.getAttribute(StringUtils.VERIFY_CODE);
+        if(request.getParameter(StringUtils.VERIFY_CODE).equals(verifyCode)) {
+            User user = userService.requestForUser(request.getParameter(StringUtils.USERNAME));
+            if(user.getPassword().equals(request.getParameter(StringUtils.PASSWORD))) {
+                result.put("returnCode", StatusCode.SUCCESS);
+                result.put("user", user);
+            } else {
+                result.put("returnCode", StatusCode.WRONG_PASSWORD);
+            }
+        } else {
+            result.put("returnCode", StatusCode.WRONG_VERIFYCODE);
+        }
+        return result;
     }
-    @RequestMapping(path = "/User/QueryByEmail/{email}")
-    public User queryUserByNameController(@PathVariable String email) throws Exception {
-        User user = new User();
-        user.setEmail(email);
-        return userService.findUser(user);
+
+    @RequestMapping(path="/userRegistry", method = RequestMethod.POST)
+    public Map<String, Object> userRegistry(HttpServletRequest request) {
+        Map<String, Object> result = new HashMap<>();
+        return result;
     }
-   @RequestMapping(path = "/User/Register")
-    public Map<Integer, User> registerUser(User user) throws Exception {
-        User u = new User();
-        u.setPhoneNumber("+86-15202812000");
-        u.setName("Yin Zhi");
-        u.setEmail("273171192@11.com");
-        u.setUsername("Lemon");
-        u.setPassword("AA565885565885");
-        u.setAge(5);
-        u.setUserType(UserType.CUSTOMER);
-        u.setUserBalance(0.0);
-        u.setUserCoin(0);
-        u.setUserLastLogin(new Date());
-        u.setRegistDate(new Date());
-        return userService.addUser(u);
-    }
-/*
-    @RequestMapping(path = "/queryByName")
-    public User queryUserByNameController(String name) {
-        User user = new User();
-        user.setEmail("jarwemailsky@126.com");
-        user.setName("jarwe");
-        user.setPhoneNumber("13308238167");
-        user.setUid("asdfweqfasdfwqe");
-        return user;
-    }
-*/
 }

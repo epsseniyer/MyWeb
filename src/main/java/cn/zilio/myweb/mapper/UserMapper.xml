@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zilion.myweb.mapper.UserMapper">
+    <insert id="addUser" parameterType="cn.zilion.myweb.pojo.User" resultType="java.lang.String">
+        <selectKey keyColumn="userId" resultType="java.lang.String" order="AFTER">
+            SELECT LAST_INSERT_ID() as userId
+        </selectKey>
+        INSERT table user(userid, username, password, name, age, gender, address, email, cellphone, score, balance, createdate, lastlogin, token)
+        VALUES (uuid(), #{username}, #{password}, #{name}, #{age}, #{gender}, #{address}, #{email}, #{cellphone}, #{score}, #{balance}, #{createdate}, #{lastlogin}, #{token})
+    </insert>
+
+    <select id="findUserById" parameterType="cn.zilion.myweb.pojo.User" resultType="cn.zilion.myweb.pojo.User">
+        SELECT * FROM user WHERE userid=#{userid}
+    </select>
+
+    <select id="findUserByName" parameterType="cn.zilion.myweb.pojo.User" resultType="cn.zilion.myweb.pojo.User">
+        SELECT * FROM user WHERE username=#{username} and password=${password}
+    </select>
+
+    <update id="updateUser" parameterType="cn.zilion.myweb.pojo.User" resultType="cn.zilion.myweb.pojo.User">
+        UPDATE user set name=#{name}, password=#{password}, age=#{age}, gender=#{gender}, address=#{address}, email=#{email}, cellphone=#{cellphone}, score=#{score}, balance=#{balance}, createdate=#{createdate}, lastlogin=#{lastlogin}, token=#{token}
+        WHERE userid=#{userid}
+    </update>
+</mapper>

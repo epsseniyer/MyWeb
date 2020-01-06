@@ -1,9 +1,7 @@
 package cn.zilio.myweb.utils;
 
 public class StringUtils {
-    public static class USER {
-        public static final String USER_VALIDATION_FLAG = "user_validation_flag";
-        public static final String USER_VALIDATION_REQUEST_TIMES = "user_validation_request_time";
-    }
-
+    public static final String VERIFY_CODE = "verifyCode";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
 }
